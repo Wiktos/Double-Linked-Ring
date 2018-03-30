@@ -19,5 +19,6 @@ namespace ring_test{
     void test_remove_method();
     void test_swap_method();
     void test_merge_and_binary_op();
+    void test_iterator_class_first();
 
 }

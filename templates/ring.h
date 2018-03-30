@@ -10,7 +10,6 @@ class Ring
 {
     //private member types
     struct Node;
-
     Node *any;
     std::size_t length;
 
@@ -54,6 +53,14 @@ public:
         return !(*this == rhs);
     }
 
+    //iterator
+    iterator iter() noexcept{
+        return any ? iterator(any) : nullptr;
+    }
+    const_iterator iter() const noexcept{
+        return any ? iterator(any) : nullptr;
+    }
+
     //capacity
     bool is_empty() const noexcept { return length == 0; }
     std::size_t size() const noexcept { return length; }
@@ -77,3 +84,4 @@ public:
 };
 
 #include "ring.tpp"
+#include "ring_iter.tpp"

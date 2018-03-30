@@ -191,3 +191,37 @@ void ring_test::test_merge_and_binary_op(){
     merged_seq3 += copied;
     test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq3);
 }
+
+void ring_test::test_iterator_class_first(){
+    Ring<int, int> my_tested;
+    Ring<int, int>::iterator iter = my_tested.iter();
+    Ring<int, int>::const_iterator const_iter1 = my_tested.iter();
+
+    //checking iter() return nullptr
+    if(iter != nullptr || const_iter1 != nullptr)
+        ring_test::error_messenger().report("iterator test !nullptr");
+
+    my_tested.push(1, 1);
+    //checking iter() return any
+    iter = my_tested.iter();
+    Ring<int, int>::const_iterator const_iter2 = my_tested.iter();
+
+    if(iter == nullptr || const_iter2 == nullptr)
+        ring_test::error_messenger().report("iterator test =nullptr");
+
+    //checking contain value
+    auto node = *iter;
+
+    if(node.key != 1 || node.info != 1)
+        ring_test::error_messenger().report("iterator test contain value not equal to proper one");
+
+    iter->key = 3;
+    Ring<int, int>::iterator iter_bis = my_tested.iter();
+    if(iter_bis->key != 3)
+        ring_test::error_messenger().report("iterator test wrong modification");
+
+    my_tested.push(2, 2);
+    iter++;
+    if(iter->key != 2)
+        ring_test::error_messenger().report("iterator test wrong op++");
+}
