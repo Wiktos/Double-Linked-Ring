@@ -1,6 +1,8 @@
 #pragma once
 #include <stdexcept>
 #include <functional>
+#include <initializer_list>
+
 #include <iostream>
 
 template <typename Key, typename Info>
@@ -31,6 +33,10 @@ public:
     Ring(Ring<Key, Info>&& source) noexcept : any(std::move(source.any)), length(std::move(source.length)) {
        source.any = nullptr;
        source.length = 0;
+    }
+    Ring(std::initializer_list<std::pair<Key, Info>> ls) noexcept : any(nullptr), length(0){
+        for(auto curr_pair : ls)
+            push(curr_pair.first, curr_pair.second);
     }
 
     //operators

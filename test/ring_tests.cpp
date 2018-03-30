@@ -8,6 +8,16 @@ void ring_test::test_constructor(){
         ring_test::error_messenger().report("is_empty() test constructor error");
     if(test.size())
         ring_test::error_messenger().report("size() test constructor error");
+
+    Ring<int, int> test2{ {1, 1}, {2, 2}, {3, 3} };
+    if(test2.size() != 3)
+        ring_test::error_messenger().report("size() test init_list constructor error");
+
+    stringstream expected_output("1 1\n2 2\n3 3\n");
+    stringstream output_received;
+    output_received << test2;
+    if(output_received.str() != expected_output.str())
+        ring_test::error_messenger().report("init_list constructor error");
 }
 
 void ring_test::test_push(){
