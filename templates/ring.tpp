@@ -36,6 +36,9 @@ Ring<Key, Info>& Ring<Key, Info>::operator=(const Ring<Key, Info>& rhs){
 
     clear();
     Node *curr = rhs.any;
+    if(!curr)
+        return *this;
+
     do{
         this->push(curr->key, curr->info);
         curr = curr->prev;
@@ -90,4 +93,19 @@ void Ring<Key, Info>::clear() noexcept{
 
     length = 0;
     any = nullptr;
+}
+
+template <typename Key, typename Info>
+bool Ring<Key, Info>::contain(const Key& loc) const {
+    Node *curr = any;
+
+    do{
+        if(curr->key == loc)
+            return true;
+
+        curr = curr->next;
+    }
+    while(curr != any);
+
+    return false;
 }

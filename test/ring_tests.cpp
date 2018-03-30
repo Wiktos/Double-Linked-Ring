@@ -51,3 +51,24 @@ void ring_test::test_clear_and_assign_op(){
     if(output_received.str() != expected_output.str())
         ring_test::error_messenger().report("operator = error");
 }
+
+void ring_test::test_contain_method(){
+    Ring<int, int> my_tested;
+
+    my_tested.push(1, 1);
+    if(!my_tested.contain(1))
+        ring_test::error_messenger().report("contain test fail - key exist");
+    if(my_tested.contain(2))
+        ring_test::error_messenger().report("contain test fail - key does not exist");
+}
+
+void ring_test::test_compare_method(){
+    Ring<int, int> first;
+    Ring<int, int> second;
+    bool compare_res = first.compare(second, [](const Ring<int, int> first, const Ring<int, int> second) ->bool{
+                        return first.size() > second.size();
+                     });
+
+    if(compare_res)
+        ring_test::error_messenger().report("compare method error");
+}
