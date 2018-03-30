@@ -12,10 +12,11 @@ public:
         return *this;
     }
 
-    Node operator*() noexcept{
+    Node& operator*() noexcept{
         return *it;
     }
-    const Node operator*() const noexcept{
+
+    const Node& operator*() const noexcept{
         return *it;
     }
 

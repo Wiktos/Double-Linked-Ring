@@ -215,7 +215,7 @@ void ring_test::test_iterator_class_first(){
     if(node.key != 1 || node.info != 1)
         ring_test::error_messenger().report("iterator test contain value not equal to proper one");
 
-    iter->key = 3;
+    (*iter).key = 3;
     Ring<int, int>::iterator iter_bis = my_tested.iter();
     if(iter_bis->key != 3)
         ring_test::error_messenger().report("iterator test wrong modification");
