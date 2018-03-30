@@ -36,6 +36,10 @@ public:
     //operators
     Ring<Key, Info>& operator=(const Ring<Key, Info>& rhs);
     Ring<Key, Info>& operator=(Ring<Key, Info>&& rhs) noexcept;
+    bool operator==(const Ring<Key, Info>& rhs) const noexcept;
+    bool operator!=(const Ring<Key, Info>& rhs) const noexcept {
+        return !(*this == rhs);
+    }
 
     //capacity
     bool is_empty() const noexcept { return length == 0; }

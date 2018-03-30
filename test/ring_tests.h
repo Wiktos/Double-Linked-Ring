@@ -15,5 +15,6 @@ namespace ring_test{
     void test_clear_and_assign_op();
     void test_contain_method();
     void test_compare_method();
+    void test_equals_operator();
 
 }

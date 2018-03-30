@@ -72,3 +72,19 @@ void ring_test::test_compare_method(){
     if(compare_res)
         ring_test::error_messenger().report("compare method error");
 }
+
+void ring_test::test_equals_operator(){
+    Ring<int, int> first;
+    Ring<int, int> second;
+
+    if(!(first == second))
+        ring_test::error_messenger().report("op== test1 error");
+
+    first.push(1, 1);
+    if(first == second)
+        ring_test::error_messenger().report("op== test2 error");
+
+    second.push(1, 1);
+    if(!(first == second))
+        ring_test::error_messenger().report("op== test3 error");
+}

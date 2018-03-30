@@ -63,6 +63,28 @@ Ring<Key, Info>& Ring<Key, Info>::operator=(Ring<Key, Info>&& rhs) noexcept{
 }
 
 template <typename Key, typename Info>
+bool Ring<Key, Info>::operator==(const Ring<Key, Info>& rhs) const noexcept{
+    if(size() != rhs.size())
+        return false;
+
+    if(is_empty())
+        return true;
+
+    Node *left = any;
+    Node *right = rhs.any;
+
+    do{
+        if(left->key != right->key || left->info != right->info)
+            return false;
+        left = left->next;
+        right = right->next;
+    }
+    while(left != any);
+
+    return true;
+}
+
+template <typename Key, typename Info>
 void Ring<Key, Info>::push(const Key& key, const Info& info){
     if(is_empty()){
         any = new Node{key, info};
@@ -102,7 +124,6 @@ bool Ring<Key, Info>::contain(const Key& loc) const {
     do{
         if(curr->key == loc)
             return true;
-
         curr = curr->next;
     }
     while(curr != any);
