@@ -40,7 +40,7 @@ public:
         return curr;
     }
 
-    iterator operator++() const noexcept{
+    iterator& operator++() const noexcept{
         it = it->next;
         return *this;
     }
@@ -58,7 +58,7 @@ public:
         return curr;
     }
 
-    iterator operator--() const noexcept{
+    iterator& operator--() const noexcept{
         it = it->prev;
         return *this;
     }
