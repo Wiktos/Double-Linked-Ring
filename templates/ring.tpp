@@ -41,7 +41,7 @@ Ring<Key, Info>& Ring<Key, Info>::operator=(const Ring<Key, Info>& rhs){
 
     do{
         this->push(curr->key, curr->info);
-        curr = curr->prev;
+        curr = curr->next;
     }
     while(curr != rhs.any);
 
@@ -101,6 +101,35 @@ void Ring<Key, Info>::push(const Key& key, const Info& info){
 }
 
 template <typename Key, typename Info>
+void Ring<Key, Info>::remove(const Key& key){
+    if(is_empty())
+        throw RingInvalidArgument("Ring::remove exception");
+
+    if(size() == 1 && any->key == key){
+        delete any;
+        any = nullptr;
+        length--;
+        return;
+    }
+
+    Node *curr = any;
+    do{
+        if(curr->key == key){
+            curr->prev->next = curr->next;
+            curr->next->prev = curr->prev;
+            any = curr->next;
+            delete curr;
+            length--;
+            return;
+        }
+        curr = curr->next;
+    }
+    while(curr != any);
+
+    throw RingInvalidArgument("Ring::remove exception");
+}
+
+template <typename Key, typename Info>
 void Ring<Key, Info>::clear() noexcept{
     if(!any)
         return;
@@ -115,6 +144,27 @@ void Ring<Key, Info>::clear() noexcept{
 
     length = 0;
     any = nullptr;
+}
+
+template <typename Key, typename Info>
+void Ring<Key, Info>::swap(Ring<Key, Info>& ring){
+    Ring<Key, Info> tmp(*this);
+    *this = ring;
+    ring = tmp;
+}
+
+template <typename Key, typename Info>
+Ring<Key, Info> Ring<Key, Info>::merge(const Ring<Key, Info> ring) const {
+    Ring<Key, Info> ret_ring(*this);
+
+    Node *curr = ring.any;
+    do{
+        ret_ring.push(curr->key, curr->info);
+        curr = curr->next;
+    }
+    while(curr != ring.any);
+
+    return ret_ring;
 }
 
 template <typename Key, typename Info>

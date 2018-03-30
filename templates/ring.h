@@ -36,6 +36,13 @@ public:
     //operators
     Ring<Key, Info>& operator=(const Ring<Key, Info>& rhs);
     Ring<Key, Info>& operator=(Ring<Key, Info>&& rhs) noexcept;
+    Ring<Key, Info> operator+(const Ring<Key, Info>& rhs) const{
+        return this->merge(rhs);
+    }
+    Ring<Key, Info>& operator+=(const Ring<Key, Info>& rhs){
+        *this = *this + rhs;
+        return *this;
+    }
     bool operator==(const Ring<Key, Info>& rhs) const noexcept;
     bool operator!=(const Ring<Key, Info>& rhs) const noexcept {
         return !(*this == rhs);
@@ -47,7 +54,10 @@ public:
 
     //modifiers
     void push(const Key& key, const Info& info);
+    void remove(const Key& key);
     void clear() noexcept;
+    void swap(Ring<Key, Info>& ring);
+    Ring<Key, Info> merge(const Ring<Key, Info> ring) const;
 
     //operations
     bool compare(const Ring<Key, Info>& rhs, std::function<bool(const Ring<Key, Info>&, const Ring<Key, Info>&)> comparator) const {
