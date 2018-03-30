@@ -12,5 +12,6 @@ namespace ring_test{
 
     void test_constructor();
     void test_push();
+    void test_clear_and_assign_op();
 
 }

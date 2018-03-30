@@ -33,4 +33,21 @@ void ring_test::test_push(){
         ring_test::error_messenger().report("operator << test pushing error");
 }
 
-//
+void ring_test::test_clear_and_assign_op(){
+    Ring<int, int> test;
+    test.push(1, 1);
+    test.push(1, 1);
+    test.push(1, 1);
+
+    Ring<int, int> sec = test;
+
+    test.clear();
+    if(test.size())
+        ring_test::error_messenger().report("clear() doesn't set lenght = 0");
+
+    stringstream expected_output("1 1\n1 1\n1 1\n");
+    stringstream output_received;
+    output_received << sec;
+    if(output_received.str() != expected_output.str())
+        ring_test::error_messenger().report("operator = error");
+}

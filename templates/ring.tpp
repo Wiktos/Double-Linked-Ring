@@ -30,8 +30,24 @@ public:
 };
 
 template <typename Key, typename Info>
+Ring<Key, Info>& Ring<Key, Info>::operator=(const Ring<Key, Info>& rhs){
+    if(this == &rhs)
+        return *this;
+
+    clear();
+    Node *curr = rhs.any;
+    do{
+        this->push(curr->key, curr->info);
+        curr = curr->prev;
+    }
+    while(curr != rhs.any);
+
+    return *this;
+}
+
+template <typename Key, typename Info>
 void Ring<Key, Info>::push(const Key& key, const Info& info){
-    if(!any){
+    if(is_empty()){
         any = new Node{key, info};
         any->next = any;
         any->prev = any;
@@ -43,4 +59,21 @@ void Ring<Key, Info>::push(const Key& key, const Info& info){
     any->prev->next = new_elem;
     any->prev = new_elem;
     length++;
+}
+
+template <typename Key, typename Info>
+void Ring<Key, Info>::clear() noexcept{
+    if(!any)
+        return;
+
+    Node *curr = any->next;
+    while(curr != any){
+        Node *deleted = curr;
+        curr = curr->next;
+        delete deleted;
+    }
+    delete any;
+
+    length = 0;
+    any = nullptr;
 }
