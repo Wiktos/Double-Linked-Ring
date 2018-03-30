@@ -46,6 +46,20 @@ Ring<Key, Info>& Ring<Key, Info>::operator=(const Ring<Key, Info>& rhs){
 }
 
 template <typename Key, typename Info>
+Ring<Key, Info>& Ring<Key, Info>::operator=(Ring<Key, Info>&& rhs) noexcept{
+    if(this == &rhs)
+        return *this;
+
+    clear();
+    any = std::move(rhs.any);
+    length = std::move(rhs.length);
+    rhs.any = nullptr;
+    rhs.length = 0;
+
+    return *this;
+}
+
+template <typename Key, typename Info>
 void Ring<Key, Info>::push(const Key& key, const Info& info){
     if(is_empty()){
         any = new Node{key, info};
@@ -68,9 +82,9 @@ void Ring<Key, Info>::clear() noexcept{
 
     Node *curr = any->next;
     while(curr != any){
-        Node *deleted = curr;
+        Node *curr_del = curr;
         curr = curr->next;
-        delete deleted;
+        delete curr_del;
     }
     delete any;
 
