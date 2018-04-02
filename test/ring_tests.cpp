@@ -221,7 +221,7 @@ void ring_test::test_iterator_class(){
         ring_test::error_messenger().report("iterator test wrong modification");
 
     my_tested.push(2, 2);
-    iter + 1;
+    iter = iter + 1;
     if(iter.get_info() != 2)
         ring_test::error_messenger().report("iterator test wrong op++");
 
