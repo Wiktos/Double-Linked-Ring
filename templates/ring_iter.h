@@ -19,7 +19,7 @@ public:
     }
 
     //operators
-    iterator& operator=(const_iterator& rhs) const noexcept;
+    iterator& operator=(const_iterator& rhs) noexcept;
     iterator& operator=(iterator&& rhs) noexcept;
     Node& operator*() noexcept;
     const Node& operator*() const noexcept;
@@ -33,6 +33,12 @@ public:
     iterator operator--(int) const noexcept;
     iterator& operator--() const noexcept;
     iterator operator-(int rhs) const noexcept;
+
+    //element access
+    Key& get_key() noexcept;
+    const Key& get_key() const noexcept;
+    Info& get_info() noexcept;
+    const Info& get_info() const noexcept;
 
     ~iterator() = default;
 };

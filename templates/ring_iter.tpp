@@ -1,5 +1,5 @@
 template <typename Key, typename Info>
-typename Ring<Key, Info>::iterator& Ring<Key, Info>::iterator::operator=(const typename Ring<Key, Info>::iterator& rhs) const noexcept{
+typename Ring<Key, Info>::iterator& Ring<Key, Info>::iterator::operator=(const typename Ring<Key, Info>::iterator& rhs) noexcept{
     it = rhs.it;
     return *this;
 }
@@ -56,10 +56,11 @@ typename Ring<Key, Info>::iterator& Ring<Key, Info>::iterator::operator++() cons
 
 template <typename Key, typename Info>
 typename Ring<Key, Info>::iterator Ring<Key, Info>::iterator::operator+(int rhs) const noexcept{
+    iterator curr(it);
     for(int i = 0; i < rhs; i++)
-        it = it->next;
+        curr.it = curr.it->next;
 
-    return *this;
+    return curr;
 }
 
 template <typename Key, typename Info>
@@ -77,8 +78,29 @@ typename Ring<Key, Info>::iterator& Ring<Key, Info>::iterator::operator--() cons
 
 template <typename Key, typename Info>
 typename Ring<Key, Info>::iterator Ring<Key, Info>::iterator::operator-(int rhs) const noexcept{
+    iterator curr(it);
     for(int i = 0; i < rhs; i++)
-        it = it->prev;
+        curr.it = curr.it->prev;
 
-    return *this;
+    return curr;
+}
+
+template <typename Key, typename Info>
+Key& Ring<Key, Info>::iterator::get_key() noexcept{
+    return it->key;
+}
+
+template <typename Key, typename Info>
+const Key& Ring<Key, Info>::iterator::get_key() const noexcept{
+    return it->key;
+}
+
+template <typename Key, typename Info>
+Info& Ring<Key, Info>::iterator::get_info() noexcept{
+    return it->info;
+}
+
+template <typename Key, typename Info>
+const Info& Ring<Key, Info>::iterator::get_info() const noexcept{
+    return it->info;
 }

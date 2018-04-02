@@ -192,7 +192,7 @@ void ring_test::test_merge_and_binary_op(){
     test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq3);
 }
 
-void ring_test::test_iterator_class_first(){
+void ring_test::test_iterator_class(){
     Ring<int, int> my_tested;
     Ring<int, int>::iterator iter = my_tested.iter();
     Ring<int, int>::const_iterator const_iter1 = my_tested.iter();
@@ -221,7 +221,9 @@ void ring_test::test_iterator_class_first(){
         ring_test::error_messenger().report("iterator test wrong modification");
 
     my_tested.push(2, 2);
-    iter++;
-    if(iter->key != 2)
+    iter + 1;
+    if(iter.get_info() != 2)
         ring_test::error_messenger().report("iterator test wrong op++");
+
+
 }

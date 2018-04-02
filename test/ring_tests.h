@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "../templates/ring.h"
+#include "../templates/ring_iter.h"
 #include "error_messenger.h"
 
 namespace ring_test{
@@ -19,6 +20,6 @@ namespace ring_test{
     void test_remove_method();
     void test_swap_method();
     void test_merge_and_binary_op();
-    void test_iterator_class_first();
+    void test_iterator_class();
 
 }
