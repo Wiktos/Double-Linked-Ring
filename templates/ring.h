@@ -3,8 +3,6 @@
 #include <functional>
 #include <initializer_list>
 
-#include <iostream>
-
 template <typename Key, typename Info>
 class Ring
 {
@@ -78,10 +76,9 @@ public:
     }
     bool contain(const Key& loc) const;
 
-    ~Ring() noexcept{
+    ~Ring() noexcept {
         clear();
     }
 };
 
 #include "ring.tpp"
-#include "ring_iter.tpp"
