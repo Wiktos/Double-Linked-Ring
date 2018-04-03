@@ -21,12 +21,16 @@ public:
     //operators
     iterator& operator=(const_iterator& rhs) noexcept;
     iterator& operator=(iterator&& rhs) noexcept;
-    Node& operator*() noexcept;
-    const Node& operator*() const noexcept;
-    Node* operator->() noexcept;
-    const Node* operator->() const noexcept;
+
+    std::pair<Key&, Info&> operator*() noexcept;
+    std::pair<const Key&, const Info&> operator*() const noexcept;
+
+    std::pair<Key&, Info&>* operator->() noexcept;
+    std::pair<const Key&, const Info&>* operator->() const noexcept;
+
     bool operator==(iterator rhs) const noexcept;
     bool operator!=(iterator rhs) const noexcept;
+
     iterator operator++(int) const noexcept;
     iterator& operator++() const noexcept;
     iterator operator+(int rhs) const noexcept;

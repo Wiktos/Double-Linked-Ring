@@ -31,7 +31,7 @@ public:
        source.any = nullptr;
        source.length = 0;
     }
-    Ring(std::initializer_list<std::pair<Key, Info>> ls) noexcept : any(nullptr), length(0){
+    Ring(std::initializer_list<std::pair<Key, Info>> ls) : any(nullptr), length(0){
         for(auto curr_pair : ls)
             push(curr_pair.first, curr_pair.second);
     }
@@ -53,10 +53,10 @@ public:
 
     //iterator
     iterator iter() noexcept{
-        return any ? iterator(any) : nullptr;
+        return any ? iterator(any) : iterator(nullptr);
     }
     const_iterator iter() const noexcept{
-        return any ? iterator(any) : nullptr;
+        return any ? iterator(any) : iterator(nullptr);
     }
 
     //capacity

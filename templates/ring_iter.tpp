@@ -12,23 +12,27 @@ typename Ring<Key, Info>::iterator& Ring<Key, Info>::iterator::operator=(typenam
 }
 
 template <typename Key, typename Info>
-typename Ring<Key, Info>::Node& Ring<Key, Info>::iterator::operator*() noexcept{
-    return *it;
+std::pair<Key&, Info&> Ring<Key, Info>::iterator::operator*() noexcept{
+    return std::make_pair(std::ref(it->key), std::ref(it->info));
 }
 
 template <typename Key, typename Info>
-const typename Ring<Key, Info>::Node& Ring<Key, Info>::iterator::operator*() const noexcept{
-    return *it;
+std::pair<const Key&, const Info&> Ring<Key, Info>::iterator::operator*() const noexcept{
+    return std::make_pair(std::ref(it->key), std::ref(it->info));
 }
 
 template <typename Key, typename Info>
-typename Ring<Key, Info>::Node* Ring<Key, Info>::iterator::operator->() noexcept{
-    return it;
+std::pair<Key&, Info&>* Ring<Key, Info>::iterator::operator->() noexcept{
+    std::pair<Key&, Info&> retv = std::make_pair(std::ref(it->key), std::ref(it->info));
+    std::pair<Key&, Info&> *ret_ptr = &retv;
+    return ret_ptr;
 }
 
 template <typename Key, typename Info>
-const typename Ring<Key, Info>::Node* Ring<Key, Info>::iterator::operator->() const noexcept{
-    return it;
+std::pair<const Key&, const Info&>* Ring<Key, Info>::iterator::operator->() const noexcept{
+    std::pair<const Key&, const Info&> retv = std::make_pair(std::ref(it->key), std::ref(it->info));
+    std::pair<const Key&, const Info&> *ret_ptr = &retv;
+    return ret_ptr;
 }
 
 template <typename Key, typename Info>

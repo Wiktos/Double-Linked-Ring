@@ -209,21 +209,22 @@ void ring_test::test_iterator_class(){
     if(iter == nullptr || const_iter2 == nullptr)
         ring_test::error_messenger().report("iterator test =nullptr");
 
+    if((*const_iter2).first !=1)
+        ring_test::error_messenger().report("const_iterator test op*");
+
     //checking contain value
     auto node = *iter;
 
-    if(node.key != 1 || node.info != 1)
+    if(node.first != 1 || node.second != 1)
         ring_test::error_messenger().report("iterator test contain value not equal to proper one");
 
-    (*iter).key = 3;
+    (*iter).first = 3;
     Ring<int, int>::iterator iter_bis = my_tested.iter();
-    if(iter_bis->key != 3)
+    if(iter_bis->first != 3)
         ring_test::error_messenger().report("iterator test wrong modification");
 
     my_tested.push(2, 2);
-    iter = iter + 1;
-    if(iter.get_info() != 2)
+    iter++;
+    if(iter->second != 2)
         ring_test::error_messenger().report("iterator test wrong op++");
-
-
 }
