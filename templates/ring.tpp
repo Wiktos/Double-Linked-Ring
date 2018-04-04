@@ -154,6 +154,25 @@ void Ring<Key, Info>::swap(Ring<Key, Info>& ring){
 }
 
 template <typename Key, typename Info>
+void Ring<Key, Info>::reverse() noexcept{
+    if(is_empty())
+        return;
+
+    Node *curr = any;
+    Node *next = any->next;
+    do{
+        //switch pointers
+        Node *prev = curr->prev;
+        curr->prev = curr->next;
+        curr->next = prev;
+
+        curr = next;
+        next = curr->next;
+    }
+    while(curr != any);
+}
+
+template <typename Key, typename Info>
 Ring<Key, Info> Ring<Key, Info>::merge(const Ring<Key, Info> ring) const {
     Ring<Key, Info> ret_ring(*this);
 
