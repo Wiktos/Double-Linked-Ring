@@ -68,9 +68,26 @@ public:
     void remove(const Key& key);
     void clear() noexcept;
     void swap(Ring<Key, Info>& ring);
-    Ring<Key, Info> merge(const Ring<Key, Info> ring) const;
+    void reverse(){
+        if(is_empty())
+            return;
+
+        Node *curr = any;
+        Node *next = any->next;
+        do{
+            //switch pointers
+            Node *prev = curr->prev;
+            curr->prev = curr->next;
+            curr->next = prev;
+
+            curr = next;
+            next = curr->next;
+        }
+        while(curr != any);
+    }
 
     //operations
+    Ring<Key, Info> merge(const Ring<Key, Info> ring) const;
     bool compare(const Ring<Key, Info>& rhs, std::function<bool(const Ring<Key, Info>&, const Ring<Key, Info>&)> comparator) const {
         return comparator(*this, rhs);
     }

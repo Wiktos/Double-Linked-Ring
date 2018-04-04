@@ -1,4 +1,5 @@
 #include "../test/ring_tests.h"
+#include "../templates/produce.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ int main()
     ring_test::test_swap_method();
     ring_test::test_merge_and_binary_op();
     ring_test::test_iterator_class();
+    ring_test::test_produce_method();
 
     ring_test::error_messenger().print_report(std::cout);
     return 0;

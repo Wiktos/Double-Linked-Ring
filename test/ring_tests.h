@@ -3,6 +3,7 @@
 
 #include "../templates/ring.h"
 #include "../templates/ring_iter.h"
+#include "../templates/produce.h"
 #include "error_messenger.h"
 
 namespace ring_test{
@@ -21,5 +22,6 @@ namespace ring_test{
     void test_swap_method();
     void test_merge_and_binary_op();
     void test_iterator_class();
+    void test_produce_method();
 
 }

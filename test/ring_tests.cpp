@@ -228,3 +228,12 @@ void ring_test::test_iterator_class(){
     if(iter->second != 2)
         ring_test::error_messenger().report("iterator test wrong op++");
 }
+
+void ring_test::test_produce_method(){
+    Ring<int, int> r1{{3, 3}, {1, 1}, {2, 2}};
+    Ring<int, int> r2{{10, 10}, {20, 20}, {30, 30}, {40, 40}};
+
+    Ring<int, int> r3 = produce(r1, 1, 2, true, r2, 0, 3, false, 2, false);
+
+    std::cout << r3;
+}
