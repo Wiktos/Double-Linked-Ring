@@ -198,7 +198,7 @@ void ring_test::test_iterator_class(){
     Ring<int, int>::const_iterator const_iter1 = my_tested.iter();
 
     //checking iter() return nullptr
-    if(iter != nullptr || const_iter1 != nullptr)
+    if(iter != Ring<int, int>::iterator(nullptr) || const_iter1 != Ring<int, int>::iterator(nullptr))
         ring_test::error_messenger().report("iterator test !nullptr");
 
     my_tested.push(1, 1);
@@ -206,7 +206,7 @@ void ring_test::test_iterator_class(){
     iter = my_tested.iter();
     Ring<int, int>::const_iterator const_iter2 = my_tested.iter();
 
-    if(iter == nullptr || const_iter2 == nullptr)
+    if(iter == Ring<int, int>::iterator(nullptr) || const_iter2 == Ring<int, int>::iterator(nullptr))
         ring_test::error_messenger().report("iterator test =nullptr");
 
     if((*const_iter2).first !=1)
@@ -233,7 +233,11 @@ void ring_test::test_produce_method(){
     Ring<int, int> r1{{3, 3}, {1, 1}, {2, 2}};
     Ring<int, int> r2{{10, 10}, {20, 20}, {30, 30}, {40, 40}};
 
-    Ring<int, int> r3 = produce(r1, 1, 2, true, r2, 0, 3, false, 2, false);
+    Ring<int, int> r3 = produce(r1, 1, 2, true, r2, 0, 3, false, 2, true);
 
-    std::cout << r3;
+    stringstream expected_output("1 1\n2 2\n10 10\n40 40\n30 30\n3 3\n1 1\n20 20\n10 10\n40 40\n");
+    stringstream output_received;
+    output_received << r3;
+    if(output_received.str() != expected_output.str())
+        ring_test::error_messenger().report("remove() test error - wrong stream output");
 }

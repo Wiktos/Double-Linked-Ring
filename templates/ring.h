@@ -6,8 +6,12 @@
 template <typename Key, typename Info>
 class Ring
 {
-    //private member types
+protected:
+    //protected member types
     struct Node;
+
+private:
+    //private member types
     Node *any;
     std::size_t length;
 

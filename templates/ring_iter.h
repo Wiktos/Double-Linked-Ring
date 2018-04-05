@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "ring.h"
 
 template <typename Key, typename Info>

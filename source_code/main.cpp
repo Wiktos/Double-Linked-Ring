@@ -1,5 +1,4 @@
 #include "../test/ring_tests.h"
-#include "../templates/produce.h"
 
 using namespace std;
 
