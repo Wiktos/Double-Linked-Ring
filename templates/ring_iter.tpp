@@ -30,9 +30,9 @@ std::pair<Key&, Info&>* Ring<Key, Info>::iterator::operator->() noexcept{
 }
 
 template <typename Key, typename Info>
-std::pair<const Key&, const Info&>* Ring<Key, Info>::iterator::operator->() const noexcept{
-    std::pair<const Key&, const Info&> *retv =
-                        std::unique_ptr<std::pair<const Key&, const Info&>>(new std::pair<Key&, Info&>(std::ref(it->key), std::ref(it->info))).get();
+const std::pair<Key&, Info&>* Ring<Key, Info>::iterator::operator->() const noexcept{
+    const std::pair<Key&, Info&> *retv =
+                        std::unique_ptr<const std::pair<Key&, Info&>>(new std::pair<Key&, Info&>(std::ref(it->key), std::ref(it->info))).get();
 
     return retv;
 }

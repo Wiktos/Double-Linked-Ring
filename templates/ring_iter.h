@@ -27,7 +27,7 @@ public:
     std::pair<const Key&, const Info&> operator*() const noexcept;
 
     std::pair<Key&, Info&>* operator->() noexcept;
-    std::pair<const Key&, const Info&>* operator->() const noexcept;
+    const std::pair<Key&, Info&>* operator->() const noexcept;
 
     bool operator==(iterator rhs) const noexcept;
     bool operator!=(iterator rhs) const noexcept;
