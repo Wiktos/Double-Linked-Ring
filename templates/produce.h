@@ -22,10 +22,7 @@ Ring<Key, Info> produce(const Ring<Key, Info>& r1, int start1, int step1 , bool 
            for(int j = 0; j < step; j++){
                 std::pair<Key, Info> curr_val = *iter;
                 retv.push(curr_val.first, curr_val.second);
-                if(dir)
-                    iter++;
-                else
-                    iter--;
+                dir ? iter++ : iter--;
             }
         };
 

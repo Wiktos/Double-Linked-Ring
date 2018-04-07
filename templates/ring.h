@@ -35,7 +35,7 @@ public:
        source.any = nullptr;
        source.length = 0;
     }
-    Ring(std::initializer_list<std::pair<Key, Info>> ls) : any(nullptr), length(0){
+    Ring(std::initializer_list<std::pair<Key, Info>> ls) noexcept : any(nullptr), length(0){
         for(auto curr_pair : ls)
             push(curr_pair.first, curr_pair.second);
     }
