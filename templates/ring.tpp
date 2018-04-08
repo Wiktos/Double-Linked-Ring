@@ -173,7 +173,7 @@ void Ring<Key, Info>::reverse() noexcept{
 }
 
 template <typename Key, typename Info>
-Ring<Key, Info> Ring<Key, Info>::merge(const Ring<Key, Info> ring) const {
+Ring<Key, Info> Ring<Key, Info>::merge(const Ring<Key, Info>& ring) const {
     Ring<Key, Info> ret_ring(*this);
 
     Node *curr = ring.any;
