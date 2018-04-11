@@ -7,6 +7,7 @@ class Ring<Key, Info>::iterator
 {
     //private member types
     mutable Node *it;
+    std::pair<Key&, Info&> *node_view;
 
 public:
     //constructors
@@ -23,11 +24,11 @@ public:
     iterator& operator=(const_iterator& rhs) noexcept;
     iterator& operator=(iterator&& rhs) noexcept;
 
-    std::pair<Key&, Info&> operator*() noexcept;
-    std::pair<const Key&, const Info&> operator*() const noexcept;
+    std::pair<Key&, Info&> operator*();
+    std::pair<const Key&, const Info&> operator*() const;
 
-    std::pair<Key&, Info&>* operator->() noexcept;
-    const std::pair<Key&, Info&>* operator->() const noexcept;
+    std::pair<Key&, Info&>* operator->();
+    const std::pair<Key&, Info&>* operator->() const;
 
     bool operator==(iterator rhs) const noexcept;
     bool operator!=(iterator rhs) const noexcept;
